@@ -9,6 +9,7 @@ const Items = (props) => {
                 <div key={item.id} className="item">
                     <p>{item.product}</p>
                     <p>{item.price}</p>
+                    <p>{item.quantity}</p>
                     <p className="delete" onClick={() => del(item.id)}>&times;</p>
                 </div>
             )
@@ -21,6 +22,7 @@ const Items = (props) => {
             <div className="header item">
                 <p>Product</p>
                 <p>Price</p>
+                <p>quantity</p>
                 <p>Edit</p>
             </div>
             {ListItem}
