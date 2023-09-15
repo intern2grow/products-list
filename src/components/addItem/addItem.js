@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 class addItem extends Component {
     state = {
         product: '',
-        price: ''
+        price: '',
+        quantity: ''
     }
 
     handleChange = (e) => {
@@ -18,7 +19,8 @@ class addItem extends Component {
         this.props.add(this.state)
         this.setState({
             product: '',
-            price: ''
+            price: '',
+            quantity: ''
         })
     }
 
@@ -28,6 +30,7 @@ class addItem extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" value={this.state.product} placeholder="Enter Product" id="product" onChange={this.handleChange} required/>
                     <input type="number" value={this.state.price} placeholder="Enter Price" id="price" onChange={this.handleChange} required/>
+                    <input type="number" value={this.state.quantity} placeholder="Enter Quantity" id="quantity" onChange={this.handleChange} required/>
                     <input type="submit" value="Add"/>
                 </form>
             </div>
