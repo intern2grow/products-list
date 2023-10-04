@@ -9,7 +9,21 @@ const Items = props => {
         <div key={item.id} className="item">
           <p>{item.product}</p>
           <p>{item.price}</p>
-          <p>{item.quantity}</p>
+          <div className="control-btns">
+            <button
+              className="control-btn"
+              onClick={() => props.increase(item.id)}
+            >
+              +
+            </button>
+            {item.quantity}
+            <button
+              className="control-btn"
+              onClick={() => props.decrease(item.id)}
+            >
+              -
+            </button>
+          </div>
           <p className="delete" onClick={() => del(item.id)}>
             &times;
           </p>
