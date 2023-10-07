@@ -7,10 +7,9 @@ import Total from './components/total/total'
 class App extends Component {
   state = {
     items: [
-      {id:1, product:'Pen', price:2},
-      {id:2, product:'Book', price:10}
-    ]
-  }
+      {id:1, product:'Pen', price:2, amount:1,},
+      {id:2, product:'Book', price:10, amount:1,},
+    ]}
 
   deleteItem = (id) => {
     let items = this.state.items
@@ -23,18 +22,46 @@ class App extends Component {
     this.state.items.length > 0 ? (
       item.id = this.state.items[this.state.items.length - 1].id + 1 
     ) : item.id = 1
-    console.log(item.id)
+    // console.log(item.id)
     let items = this.state.items
     items.push(item)
     this.setState({items: items})
   }
+
+  increaseAmount = id => {
+    this.setState({
+      items: this.state.items.map(item =>
+        item.id === id ? { ...item, amount: item.amount + 1 } : item
+      ),
+    });
+  };
+
+  decreaseAmount = id => {
+    const currentItem = this.state.items.find(item => item.id === id);
+    currentItem.amount -= 1;
+    if (currentItem.amount === 0) {
+      this.deleteItem(id);
+    }
+    else {
+      this.setState({
+        items: this.state.items.map(item =>
+          item.id === id ? currentItem : item
+        ),
+      });
+    }
+  };
 
   render() {
     return (
       <div className="container">
         <h1>Product List React App</h1>
         <div className="table">
-          <Items items={this.state.items} del={this.deleteItem}/>
+          <Items 
+            items={this.state.items} 
+            del={this.deleteItem}
+            increaseAmount={this.increaseAmount}
+            decreaseAmount={this.decreaseAmount}
+          />
           <AddItem add={this.addItem}/>
           <Total items={this.state.items}/>
         </div>
