@@ -4,6 +4,64 @@ import Items from './components/item/items'
 import AddItem from './components/addItem/addItem'
 import Total from './components/total/total'
 
+
+function App() {
+  const [products, setProducts] = useState([
+    { id: 1, name: 'Product 1', price: 10, quantity: 0 },
+    { id: 2, name: 'Product 2', price: 20, quantity: 0 },
+    // Add more products as needed
+  ]);
+
+  const handleIncreaseQuantity = (productId) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === productId ? { ...product, quantity: product.quantity + 1 } : product
+      )
+    );
+  };
+
+  const handleDecreaseQuantity = (productId) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === productId && product.quantity > 0
+          ? { ...product, quantity: product.quantity - 1 }
+          : product
+      )
+    );
+  };
+
+  return (
+    <div className="App">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>${product.price}</td>
+              <td>
+                <button onClick={() => handleDecreaseQuantity(product.id)}>-</button>
+                {product.quantity}
+                <button onClick={() => handleIncreaseQuantity(product.id)}>+</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+
+
 class App extends Component {
   state = {
     items: [
